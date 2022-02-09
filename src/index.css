@@ -1,0 +1,148 @@
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+  background-color: #0b2434;
+  padding: 20px;
+  font-family: "Karla", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  margin-top: 30%;
+  background-color: #f5f5f5;
+  height: 30em;
+  max-width: 70em;
+  border-radius: 5px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+.opening--container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+button {
+  flex: 1;
+  border-radius: 2em;
+  background-color: #212121;
+  color: white;
+  border: none;
+  padding: 1em;
+  font-size: 1em;
+  font-weight: bold;
+  cursor: pointer;
+  max-width: 10em;
+  max-height: 7em;
+  transition: all 0.2s ease-in-out;
+}
+.dice-container {
+  display: grid;
+  grid-template: auto auto / repeat(5, 1fr);
+  gap: 20px;
+  margin-bottom: 40px;
+}
+.title {
+  font-size: 40px;
+  margin: 0;
+}
+
+.instructions {
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
+  margin-top: 0;
+  text-align: center;
+}
+/* score styles*/
+.score-text {
+  display: flex;
+}
+.score-text > h2 {
+  align-self: center;
+}
+/*Dice faces*/
+.die-face {
+  height: 6.25em;
+  width: 6.25em;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.die-num {
+  font-size: 2rem;
+}
+.circle {
+  background-color: #2e2e2e;
+  height: 0.65em;
+  width: 0.65em;
+  border-radius: 50%;
+  display: block;
+}
+.dice-2 {
+  display: flex;
+  gap: 0.25rem;
+}
+.dice-3 {
+  display: flex;
+  transform: rotate(45deg);
+  gap: 1em;
+}
+
+.dice-4 {
+  display: grid;
+  grid-template: auto auto / repeat(2, 1fr);
+  gap: 0.25em;
+}
+.dice-6 {
+  display: grid;
+  grid-template: auto auto / repeat(2, 1fr);
+  gap: 0.25em;
+}
+/*Button Styles*/
+.button-container {
+  display: flex;
+  gap: 0.75em;
+}
+/* -----------------Roll component---------------*/
+.roll-dice {
+  height: 50px;
+  width: 150px;
+  border: none;
+  border-radius: 6px;
+  background-color: #5035ff;
+  color: white;
+  font-size: 1.2rem;
+  font-family: "Karla", sans-serif;
+  cursor: pointer;
+}
+
+.roll-dice:active {
+  box-shadow: inset 5px 5px 10px -3px rgba(0, 0, 0, 0.7);
+}
+/*-------------------Reset Component---------------*/
+.reset-button {
+  height: 50px;
+  width: 150px;
+  border: none;
+  border-radius: 6px;
+  background-color: #10ce20;
+  color: white;
+  font-size: 1.2rem;
+  padding: 1.2rem;
+  padding-top: 0;
+  font-family: "Karla", sans-serif;
+  cursor: pointer;
+}
