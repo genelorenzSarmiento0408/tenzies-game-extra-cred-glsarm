@@ -3,6 +3,7 @@ import Die from "./components/Die";
 import { nanoid } from "nanoid";
 import Confetti from "react-confetti";
 import Opening from "./components/Opening";
+import Main from "./components/Main";
 function App() {
   const [dice, setDice] = useState(
     JSON.parse(localStorage.getItem("dice")) || allNewDice(),
@@ -15,28 +16,55 @@ function App() {
   );
   const [tenzies, setTenzies] = useState(false);
 
+  const [seconds, setSeconds] = useState(
+    parseInt(localStorage.getItem("score")) || 0,
+  );
+
+  const [score, setScore] = useState(0);
   useEffect(() => {
+    let interval = null;
     const allHeld = dice.every((die) => die.isHeld);
     const firstValue = dice[0].value;
     const allSameValue = dice.every((die) => die.value === firstValue);
     if (allHeld && allSameValue) {
       setTenzies(true);
     }
-
     setMoves((oldMove) => oldMove + 1);
+
     if (start) {
       localStorage.setItem("dice", JSON.stringify(dice));
       localStorage.setItem("moves", moves);
       localStorage.setItem("start", start);
+      if (!tenzies) {
+        interval = setInterval(() => {
+          setSeconds((oldSeconds) => oldSeconds + 1);
+        }, 1000);
+      }
+      if (tenzies) {
+        clearInterval(interval);
+        setScore((oldScore) => oldScore + 10000 / (seconds + moves));
+        localStorage.setItem("score", JSON.stringify(Math.ceil(score)));
+      }
     }
-
     if (!start) {
-      localStorage.clear();
-      setMoves(-1);
-      setTenzies(false);
+      clearInterval(interval);
+      reStart();
     }
+    return () => {
+      clearInterval(interval);
+    };
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dice, start]);
+  }, [dice, start, tenzies]);
+
+  function reStart() {
+    localStorage.clear();
+    setMoves(-1);
+    setTenzies(false);
+    setSeconds(0);
+    setDice((oldDice) => oldDice.map(() => generateNewDie()));
+  }
+
   function generateNewDie() {
     return {
       value: Math.ceil(Math.random() * 6),
@@ -54,6 +82,7 @@ function App() {
   }
   function rollDice() {
     if (!tenzies) {
+      // if not yet tenzies
       setDice((oldDice) =>
         oldDice.map((die) => {
           return die.isHeld ? die : generateNewDie();
@@ -63,6 +92,7 @@ function App() {
       setTenzies(false);
       setDice(allNewDice());
       setMoves(-1);
+      setSeconds(0);
     }
   }
 
@@ -92,25 +122,15 @@ function App() {
           <Opening handleClick={() => setStart(true)} />
         ) : (
           <>
-            <h1 className="title">Mini Capstone Project: Tenzies</h1>
-            <p className="instructions">
-              Roll until all dice are the same. Click each die to freeze it at
-              its current value between rolls.
-            </p>
-            <div className="dice-container">{die}</div>
-            <div className="score-container">
-              <div className="score-text">
-                <h1>Moves: {moves}</h1>
-              </div>
-            </div>
-            <div className="button-container">
-              <button className="roll-dice" onClick={rollDice}>
-                {tenzies ? "Play Again" : "Roll Dice"}
-              </button>
-              <button className="reset-button" onClick={() => setStart(false)}>
-                Restart (same dice)
-              </button>
-            </div>
+            <Main
+              moves={moves}
+              die={die}
+              rollDice={rollDice}
+              tenzies={tenzies}
+              handleClick={() => setStart(false)}
+              seconds={seconds}
+              score={score}
+            />
           </>
         )}
       </div>

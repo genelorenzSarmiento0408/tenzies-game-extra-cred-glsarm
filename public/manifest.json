@@ -1,6 +1,6 @@
 {
-  "short_name": "GLSarm Template CRA",
-  "name": "Gene Lorenz Sarmiento Template CRA",
+  "short_name": "GLSarm Tenzies Capstone",
+  "name": "Gene Lorenz Sarmiento Tenzies Game",
   "icons": [
     {
       "src": "favicon.ico",
@@ -22,5 +22,5 @@
   "display": "standalone",
   "theme_color": "#000000",
   "background_color": "#ffffff",
-  "description": "Gene Lorenz's Template for CRA"
+  "description": "Gene Lorenz's Tenzies Game"
 }
