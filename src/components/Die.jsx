@@ -5,7 +5,7 @@ export default function Die({ isHeld, holdDice, value, id }) {
   let circles = [];
 
   for (let i = 1; i <= value; i++) {
-    circles.push(<div className="circle" key={id}></div>);
+    circles.push(<div className="circle" key={i}></div>);
   }
   return (
     <div className="die-face" style={styles} onClick={holdDice}>
