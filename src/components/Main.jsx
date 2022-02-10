@@ -25,7 +25,7 @@ export default function Main({
         <h1>
           {localStorage.getItem("score")
             ? `Total Accumulated Score: ${Math.round(score)}`
-            : `Score: ${Math.round(score)}`}
+            : `Previous Score: ${Math.ceil(score)}`}
         </h1>
       </div>
       <div className="button-container">
