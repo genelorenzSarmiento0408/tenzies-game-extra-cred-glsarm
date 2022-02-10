@@ -24,7 +24,7 @@ export default function Main({
         <h1>Time: {Math.ceil(seconds)} seconds</h1>
         <h1>
           {localStorage.getItem("score")
-            ? `prevScore: ${Math.round(score)}`
+            ? `Total Accumulated Score: ${Math.round(score)}`
             : `Score: ${Math.round(score)}`}
         </h1>
       </div>
